@@ -1,4 +1,4 @@
-<img src="img/logo.png" width="120" align = "right">
+<img src="https://github.com/UBC-MDS/edapython/blob/master/img/logo.png" width="120" align = "right">
 
 # A Package for Exploratory Data Analysis (eda_analysis)
 
@@ -6,7 +6,7 @@
 
 [![codecov](https://codecov.io/gh/UBC-MDS/edapython/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/edapython)
  
-![Release](https://github.com/UBC-MDS/edapython/workflows/Release/badge.svg?branch=master)
+[![Release](https://github.com/UBC-MDS/edapython/workflows/Release/badge.svg?branch=master)](https://test.pypi.org/project/eda-analysis/)
 
 [![Documentation Status](https://readthedocs.org/projects/edapython/badge/?version=latest)](http://edapython.readthedocs.io/)
 
@@ -36,7 +36,7 @@ pip install -i https://test.pypi.org/simple/ eda_analysis
 - pandas = ^1.0.1
 - numpy = ^1.18.1
 - altair = ^3.2.0
-- IPython
+- IPython = ^7.12.0
 
 ### Usage
 
@@ -103,7 +103,7 @@ num_vars = ['N1', 'N2', 'N3']
 generate_report(data,cat_vars,num_vars)
 ```
 
-<img src="img/report.png" width="100%" />
+<img src="https://github.com/UBC-MDS/edapython/blob/master/img/report.png" width="100%" />
 
 
 ### Documentation
