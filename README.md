@@ -36,7 +36,7 @@ pip install -i https://test.pypi.org/simple/ eda_analysis
 - pandas = ^1.0.1
 - numpy = ^1.18.1
 - altair = ^3.2.0
-- IPython = 7.13.0
+- IPython
 
 ### Usage
 
