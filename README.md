@@ -40,7 +40,7 @@ pip install -i https://test.pypi.org/simple/ eda_analysis
 
 ### Usage
 
-To use eda_analysis in a project::
+To use eda_analysis in a project:
 
     from eda_analysis import eda_analysis
     
@@ -51,9 +51,9 @@ Visit our [read the docs page](https://edapython.readthedocs.io/en/latest/source
 This is a working example:
 
 ```
-import altair as alt
 import numpy as np
 import pandas as pd
+from eda_analysis import eda_analysis as eda
 
 def helper_create_data(n=500):
     """
@@ -100,7 +100,7 @@ data = helper_create_data()
 cat_vars = ['C1', 'C2', 'C3', 'C4']
 num_vars = ['N1', 'N2', 'N3']
 
-generate_report(data,cat_vars,num_vars)
+eda.generate_report(data,cat_vars,num_vars)
 ```
 
 <img src="https://github.com/UBC-MDS/edapython/blob/master/img/report.png" width="100%" />
