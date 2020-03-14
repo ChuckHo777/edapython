@@ -247,6 +247,8 @@ def test_describe_na_value():
                        [0.5, 0.1],
                        ["a", "b"]]
 
+    # Tests that the correct error message is displayed if a non-dataframe
+    # object is passed to 'dataframe'.
     try:
         eda.describe_na_values(not_a_dataframe)
     except Exception:
@@ -254,6 +256,7 @@ def test_describe_na_value():
     else:
         raise Exception("expected an Exception, but none were raised")
 
+    # Tests that the output for a none NA tibble is correct.
     assert isinstance(eda.describe_na_values(no_na_dataframe),
                       pd.DataFrame)
     assert np.array_equiv(eda.describe_na_values(no_na_dataframe),
@@ -262,6 +265,8 @@ def test_describe_na_value():
                                         [1, 1]],
                                        index=no_na_dataframe.columns))
 
+    # Tests that the output for a tibble with an NA value in numeric
+    # columns is correct.
     assert isinstance(eda.describe_na_values(na_numerical_dataframe),
                       pd.DataFrame)
     assert np.array_equiv(eda.describe_na_values(na_numerical_dataframe),
@@ -270,6 +275,8 @@ def test_describe_na_value():
                                         [1, 1]],
                                        index=na_numerical_dataframe.columns))
 
+    # Tests that the output for a tibble with an NA value in categorical
+    # columns is correct.
     assert isinstance(eda.describe_na_values(na_categorical_dataframe),
                       pd.DataFrame)
     assert np.array_equiv(eda.describe_na_values(na_categorical_dataframe),
