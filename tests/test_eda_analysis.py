@@ -4,6 +4,7 @@ import pytest
 
 from eda_analysis import eda_analysis as eda
 
+
 def helper_create_data(n=500):
     """
     Helper function for creating dataframe for testing
@@ -45,6 +46,7 @@ def helper_create_data(n=500):
 
     return df
 
+
 def test_generate_report():
     """
     Tests the generate_report function to make sure the outputs are correct.
@@ -67,6 +69,7 @@ def test_generate_report():
     # fr wrong output
     assert not eda.generate_report(data, cat_vars, "String Input"), \
         "Expected False but True returned"
+
 
 def test_describe_cat_var():
     """
@@ -130,6 +133,7 @@ def test_describe_cat_var():
     p = eda.describe_cat_var(data, cat_vars)
     assert set(p.data.columns) == set(cat_vars), \
         'The specified categorical columns were not plotted'
+
 
 def test_calc_cor():
     """
@@ -213,6 +217,7 @@ def test_calc_cor():
                            "of the column names from the dataframe."
     # Generate test data from the helper function.
 
+
 # noinspection PyBroadException
 def test_describe_na_value():
     """
@@ -277,6 +282,7 @@ def test_describe_na_value():
                                         [1, 1],
                                         [0, 1]],
                                        index=na_categorical_dataframe.columns))
+
 
 def test_describe_num_var():
     """
