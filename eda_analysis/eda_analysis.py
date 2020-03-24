@@ -409,8 +409,8 @@ def calc_cor(dataframe, num_vars):
         alt.Color('Corr:Q', legend=alt.Legend(direction='horizontal'))
     ).properties(width=400, height=400, title="Correlation matrix")
 
-    text = heatmap.mark_text(baseline='middle', fontSize=20).encode(
-        text=alt.Text('Corr:Q', format='.2'),
+    text = heatmap.mark_text(baseline='middle', fontSize=10).encode(
+        text=alt.Text('Corr:Q', format='.1'),
         color=alt.condition(
             alt.datum.Corr <= 0.2,
             alt.value('black'),
