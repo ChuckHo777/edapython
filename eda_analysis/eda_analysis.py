@@ -298,20 +298,15 @@ def describe_num_var(dataframe, num_vars):
 
     # Make the histogram
     df_to_plot = df.T.melt().dropna()
-    plot = alt.Chart(df_to_plot).mark_bar().encode(
-        alt.X("value:Q", bin=alt.Bin(maxbins=30), title="Value"),
-        y='count()'
-    ).properties(
-        width=300,
-        height=300,
-        title='Histogram of Numeric Variables'
-    ).facet(
-        facet='variable:N',
-        columns=3
-    ).resolve_scale(
-        x='independent',
-        y='independent'
-    )
+    plot = plot = alt.vconcat(*(
+        alt.Chart(df_to_plot.query(f'variable == {var!r}'))
+        .mark_bar()
+        .encode(
+            alt.X("value", bin=alt.Bin(maxbins=30), title="Value"),
+            alt.Y("count()")
+        )
+        for var in sorted(df_to_plot.variable.unique())
+    ))
 
     return summary, plot
 

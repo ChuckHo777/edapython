@@ -318,7 +318,7 @@ def test_describe_num_var():
 
     # Test the plot type is correct.
     assert "altair" in str(type(plot)), "Plot type is not an Altair object"
-    assert plot.to_dict()['spec']['mark'] == 'bar', \
+    assert plot.to_dict()['vconcat'][0]['mark'] == 'bar', \
         "The plot should be a bar chart."
 
     # Test the axes of the plot is correctly mapped.
