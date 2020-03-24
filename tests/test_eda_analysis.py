@@ -27,6 +27,7 @@ def helper_create_data(n=500):
     N1 = list(np.random.exponential(3, n))
     N2 = list(np.random.normal(2, 2, n))
     N3 = list(np.random.normal(10, 3, n))
+    N4 = list(np.random.exponential(2, n))
     C1 = list(np.random.binomial(1, 0.7, n))
     C2 = list(np.random.poisson(1, n))
     C3 = list(np.random.binomial(5, 0.4, n))
@@ -39,6 +40,7 @@ def helper_create_data(n=500):
         'N1': N1,
         'N2': N2,
         'N3': N3,
+        'N4': N4,
         'C4': C4
     })
     rows = list(np.random.randint(0, n, 20))
@@ -300,8 +302,8 @@ def test_describe_num_var():
     test_col = test_data['N1']
 
     # Test the results when the input is correct.
-    num_col = ['N1', 'N2']
-    summary, plot = eda.describe_num_var(test_data, num_col)
+    num_col1 = ['N1', 'N2']
+    summary, plot = eda.describe_num_var(test_data, num_col1)
 
     # Test if the statistical summary is correctly calculated.
     assert summary['N1'][0] == np.nanquantile(test_col, 0.25), \
@@ -328,8 +330,11 @@ def test_describe_num_var():
     assert len(plot.data) == len(test_data), \
         'Some rows are missing when plotting'
 
+    num_col2 = ['N1', 'N2', 'N3', 'N4']
+    summary, plot1 = eda.describe_num_var(test_data, num_col2)
+
     # Testing if the specified columns has been plotted or not
-    assert set(plot.data.columns) == set(num_col), \
+    assert set(plot1.data.columns) == set(num_col2), \
         'The specified numerical columns were not plotted'
 
     # Test the Exception is correctly raised when the type of `dataframe`
