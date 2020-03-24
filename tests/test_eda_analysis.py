@@ -128,8 +128,7 @@ def test_describe_cat_var():
 
     # Testing type of returned value
     p = eda.describe_cat_var(data, cat_vars)
-    assert isinstance(p, alt.vegalite.v3.api.VConcatChart), \
-        'The function must return an altair plot'
+    assert "altair" in str(type(p)), "Plot type is not an Altair object"
 
     # Testing if the specified columns has been plotted or not
     p = eda.describe_cat_var(data, cat_vars)
@@ -319,8 +318,7 @@ def test_describe_num_var():
         "Standard deviation is not correctly calculated."
 
     # Test the plot type is correct.
-    assert isinstance(plot, alt.vegalite.v3.api.FacetChart), \
-        "Plot type is not an Altair object."
+    assert "altair" in str(type(plot)), "Plot type is not an Altair object"
     assert plot.to_dict()['spec']['mark'] == 'bar', \
         "The plot should be a bar chart."
 

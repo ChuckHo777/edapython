@@ -16,7 +16,7 @@ def generate_report(dataframe, cat_vars, num_vars):
     cat_vars: list
         A list containing names of categorical variables
     num_vars: list
-        A list containing names of numerical variable
+        A list containing names of numerical variables
 
     Returns
     --------
@@ -25,13 +25,15 @@ def generate_report(dataframe, cat_vars, num_vars):
 
     Examples
     ---------
-    >>> X= pandas.DataFrame({
-    'type':['Car','Bus','Car']
+    >>> import pandas as pd
+    >>> from eda_analysis.eda_analysis import generate_report
+    >>> X= pd.DataFrame({
+    'type':['Car','Bus','Car'],
     'height':[10,20,30]
     })
-    >>>cat_vars = ['type']
-    >>>num_vars = ['height']
-    >>> describe_cat_variable(X,cat_vars,num_vars)
+    >>> cat_vars = ['type']
+    >>> num_vars = ['height']
+    >>> generate_report(X,cat_vars,num_vars)
     """
 
     try:
@@ -78,7 +80,7 @@ def describe_na_values(dataframe):
 
     Parameters
     ----------
-    dataframe: `Pandas.DataFrame`
+    dataframe: `pandas.DataFrame`
         the input pd.DataFrame object
 
     Returns
@@ -90,21 +92,24 @@ def describe_na_values(dataframe):
 
     Examples
     ---------
+    >>> import numpy as np
+    >>> import pandas as pd
+    >>> from eda_analysis.eda_analysis import describe_na_values
     >>> no_na_dataframe = pd.DataFrame({
                                     "col_1": [0, 2],
                                     "col_2": [0.5, 0.1],
                                     "col_3": ["a", "b"]
                                     })
-    >>> describe_na_variable(no_na_dataframe)
+    >>> describe_na_values(no_na_dataframe)
     Pandas.DataFrame([[1, 1],
                      [1, 1],
                      [1, 1]], index=["col_1", "col_2", "col_3"]])
     >>>  na_numerical_dataframe = pd.DataFrame({
                                            "col_1": [0, 2],
-                                           "col_2": [numpy.nan, 0.1],
+                                           "col_2": [np.nan, 0.1],
                                            "col_3": ["a", "b"]
-                                           }),
-    >>> describe_na_variable(na_numerical_dataframe)
+                                           })
+    >>> describe_na_values(na_numerical_dataframe)
     Pandas.DataFrame([[1, 1],
                      [0, 1],
                      [1, 1]], index=["col_1", "col_2", "col_3"]])
@@ -113,7 +118,7 @@ def describe_na_values(dataframe):
                                            "col_2": [0.5, 0.1],
                                            "col_3": [np.nan, "b"]
                                            }),
-    >>> describe_na_variable(na_numerical_dataframe)
+    >>> describe_na_values(na_categorical_dataframe)
     Pandas.DataFrame([[1, 1],
                      [1, 1],
                      [0, 1]], index=["col_1", "col_2", "col_3"]])
@@ -149,12 +154,14 @@ def describe_cat_var(dataframe, cat_vars, n_cols=3):
 
     Examples
     ---------
-    >>> X= pandas.DataFrame({
-    'type':['Car','Bus','Car']
+    >>> import pandas as pd
+    >>> from eda_analysis.eda_analysis import describe_cat_var
+    >>> X = pd.DataFrame({
+    'type':['Car','Bus','Car'],
     'height':[10,20,30]
     })
     >>> cat_vars = ['type']
-    >>> describe_cat_variable(X,cat_vars)
+    >>> describe_cat_var(X,cat_vars)
     """
 
     # Checking for valid inputs
@@ -231,9 +238,11 @@ def describe_num_var(dataframe, num_vars):
 
     Examples
     ---------
-    >>> X= pandas.DataFrame({
-    'type':['Car', 'Bus', 'Car']
-    'height':[10, 20, 30]
+    >>> import pandas as pd
+    >>> from eda_analysis.eda_analysis import describe_num_var
+    >>> X = pd.DataFrame({
+    'type':['Car', 'Bus', 'Car'],
+    'height':[10, 20, 30],
     'width':[12, 15, 11]
     })
     >>> num_vars = ['height', 'width']
@@ -299,6 +308,9 @@ def describe_num_var(dataframe, num_vars):
     ).facet(
         facet='variable:N',
         columns=3
+    ).resolve_scale(
+        x ='independent',
+        y ='independent'
     )
 
     return summary, plot
@@ -325,12 +337,14 @@ def calc_cor(dataframe, num_vars):
 
     Examples
     ---------
-    >>> X= pandas.DataFrame({
-    'type':['Car','Bus','Car']
-    'width':[40, 10, 5]
+    >>> import pandas as pd
+    >>> from eda_analysis.eda_analysis import calc_cor
+    >>> X = pd.DataFrame({
+    'type':['Car','Bus','Car'],
+    'width':[40, 10, 5],
     'height':[10,20,30]
     })
-    >>>num_var = ['height', 'width']
+    >>> num_var = ['height', 'width']
     >>> calc_cor(X, num_vars)
     """
 
