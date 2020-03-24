@@ -322,9 +322,9 @@ def test_describe_num_var():
         "The plot should be a bar chart."
 
     # Test the axes of the plot is correctly mapped.
-    assert plot.to_dict()['spec']['encoding']['x']['field'] == 'value', \
+    assert plot.to_dict()['vconcat'][0]['encoding']['x']['field'] == 'value', \
         "Plot x-axis should be mapped to value."
-    assert plot.to_dict()['spec']['encoding']['y']['aggregate'] == 'count', \
+    assert plot.to_dict()['vconcat'][0]['encoding']['y']['aggregate'] == 'count', \
         "Plot y-axis should be mapped to value after aggregating with count()."
 
     # Test the Exception is correctly raised when the type of `dataframe`
