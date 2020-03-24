@@ -32,11 +32,11 @@ pip install -i https://test.pypi.org/simple/ eda_analysis
 
 ### Dependencies
 
-- python = ^3.7
-- pandas = ^1.0.1
-- numpy = ^1.18.1
-- altair = ^3.2.0
-- IPython = ^7.12.0
+- [python = ^3.7](https://www.python.org/)
+- [pandas = ^1.0.1](https://pandas.pydata.org/)
+- [numpy = ^1.18.1](https://numpy.org/)
+- [altair = ^3.2.0](https://altair-viz.github.io/)
+- [IPython = ^7.12.0](https://ipython.org/)
 
 ### Usage
 
@@ -50,7 +50,7 @@ Visit our [read the docs page](https://edapython.readthedocs.io/en/latest/source
 
 This is a working example:
 
-```
+```python
 import numpy as np
 import pandas as pd
 from eda_analysis import eda_analysis as eda
