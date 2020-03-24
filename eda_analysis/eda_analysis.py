@@ -309,8 +309,8 @@ def describe_num_var(dataframe, num_vars):
         facet='variable:N',
         columns=3
     ).resolve_scale(
-        x ='independent',
-        y ='independent'
+        x='independent',
+        y='independent'
     )
 
     return summary, plot
