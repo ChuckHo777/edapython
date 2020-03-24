@@ -1,3 +1,4 @@
+import altair as alt
 import numpy as np
 import pandas as pd
 import pytest
@@ -127,7 +128,8 @@ def test_describe_cat_var():
 
     # Testing type of returned value
     p = eda.describe_cat_var(data, cat_vars)
-    assert "altair" in str(type(p)), "Plot type is not an Altair object"
+    assert isinstance(p, alt.vegalite.v3.api.VConcatChart), \
+        'The function must return an altair plot'
 
     # Testing if the specified columns has been plotted or not
     p = eda.describe_cat_var(data, cat_vars)
