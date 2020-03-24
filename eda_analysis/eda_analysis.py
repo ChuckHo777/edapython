@@ -296,17 +296,33 @@ def describe_num_var(dataframe, num_vars):
     # Change the index more readable
     summary.index = ["25%", "75%", "min", "max", "median", "mean", "sd"]
 
-    # Make the histogram
-    df_to_plot = df.T.melt().dropna()
-    plot = plot = alt.vconcat(*(
-        alt.Chart(df_to_plot.query(f'variable == {var!r}'))
-        .mark_bar()
-        .encode(
-            alt.X("value", bin=alt.Bin(maxbins=30), title="Value"),
-            alt.Y("count()")
-        )
-        for var in sorted(df_to_plot.variable.unique())
-    ))
+    # Prepare for the histogram
+    data = df.T
+    n = len(num_vars)
+    n_cols = 3
+    n_rows = int(np.ceil(n / n_cols))
+    z = 0
+
+    # Plotting the histograms in loop
+    for i in range(n_rows):
+        for j in range(n_cols):
+            if z < n:
+                cols = num_vars[z]
+            else:
+                break
+            hist = alt.Chart(data).mark_bar(width=25).encode(
+                alt.X(cols + ':Q', title="Value"),
+                alt.Y("count()")
+            ).properties(title='Histogram of ' + num_vars[z])
+            z = z + 1
+            if j == 0:
+                row_plot = hist
+            else:
+                row_plot = alt.hconcat(row_plot, hist)
+        if i == 0:
+            plot = row_plot
+        else:
+            plot = alt.vconcat(plot, row_plot)
 
     return summary, plot
 

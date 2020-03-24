@@ -300,7 +300,8 @@ def test_describe_num_var():
     test_col = test_data['N1']
 
     # Test the results when the input is correct.
-    summary, plot = eda.describe_num_var(test_data, ['N1', 'N2'])
+    num_col = ['N1', 'N2']
+    summary, plot = eda.describe_num_var(test_data, num_col)
 
     # Test if the statistical summary is correctly calculated.
     assert summary['N1'][0] == np.nanquantile(test_col, 0.25), \
@@ -320,15 +321,16 @@ def test_describe_num_var():
 
     # Test the plot type is correct.
     assert "altair" in str(type(plot)), "Plot type is not an Altair object"
-    assert plot.to_dict()['vconcat'][0]['mark'] == 'bar', \
+    assert plot.to_dict()['hconcat'][0]['mark']['type'] == 'bar',\
         "The plot should be a bar chart."
 
-    # Test the axes of the plot is correctly mapped.
-    assert plot.to_dict()['vconcat'][0]['encoding']['x']['field'] == 'value', \
-        "Plot x-axis should be mapped to value."
-    assert plot.to_dict()['vconcat'][0]['encoding']['y']['aggregate']\
-        == 'count', \
-        "Plot y-axis should be mapped to value after aggregating with count()."
+    # Test the data of the plot is correct.
+    assert len(plot.data) == len(test_data), \
+        'Some rows are missing when plotting'
+
+    # Testing if the specified columns has been plotted or not
+    assert set(plot.data.columns) == set(num_col), \
+        'The specified numerical columns were not plotted'
 
     # Test the Exception is correctly raised when the type of `dataframe`
     # argument is wrong.
